@@ -8,12 +8,11 @@ public class MenuManager : MonoBehaviour
     public void LoadGameScene()
     {
         StartCoroutine(LoadGameSceneAsync());
-        Debug.Log("Trying to load the scene?");
     }
 
     IEnumerator LoadGameSceneAsync()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameScene");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneBuildIndex: 1); // Game scene
 
         while(!asyncLoad.isDone)
         {
