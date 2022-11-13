@@ -19,16 +19,22 @@ public class Slicer : MonoBehaviour
                 SlicedHull slicedObject = SliceObject(objectToBeSliced.gameObject, materialAfterSlice);
 
                 GameObject upperHullGameobject = slicedObject.CreateUpperHull(objectToBeSliced.gameObject, materialAfterSlice);
+                
                 GameObject lowerHullGameobject = slicedObject.CreateLowerHull(objectToBeSliced.gameObject, materialAfterSlice);
+                
 
                 upperHullGameobject.transform.position = objectToBeSliced.transform.position;
                 lowerHullGameobject.transform.position = objectToBeSliced.transform.position;
 
                 MakeItPhysical(upperHullGameobject);
                 MakeItPhysical(lowerHullGameobject);
-
+                //upperHullGameobject.GetComponent<Rigidbody>().velocity = objectToBeSliced.GetComponent<Rigidbody>().velocity;
+                //lowerHullGameobject.GetComponent<Rigidbody>().velocity = objectToBeSliced.GetComponent<Rigidbody>().velocity;
+                upperHullGameobject.GetComponent<Rigidbody>().AddForce(new Vector3(-100, 0, 0));
+                lowerHullGameobject.GetComponent<Rigidbody>().AddForce(new Vector3(100, 0, 0));
                 Destroy(objectToBeSliced.gameObject);
             }
+            Debug.Log("slice");
         }
     }
 
