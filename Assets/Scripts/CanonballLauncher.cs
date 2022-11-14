@@ -14,6 +14,10 @@ public class CanonballLauncher : MonoBehaviour
     [SerializeField]
     [Range(0.01f, 0.25f)]
     private float TimeBetweenPoints = 0.1f;
+    [SerializeField]
+    AudioSource audioData;
+    [SerializeField]
+    AudioClip clip;
 
     float elapsed = 0;
 
@@ -30,10 +34,13 @@ public class CanonballLauncher : MonoBehaviour
         if (elapsed >= 1f)
         {
             elapsed = elapsed % 1f;
+            audioData.clip = clip;
+            audioData.Play();
             GameObject canonball = Instantiate(projectile, transform.position,
                                                      transform.rotation);
             canonball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
                                                  (0, launchVelocity, 0));
+            
         }
         
     }
