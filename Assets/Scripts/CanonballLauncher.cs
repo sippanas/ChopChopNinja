@@ -20,20 +20,24 @@ public class CanonballLauncher : MonoBehaviour
     AudioClip clip;
 
     float elapsed = 0;
+    float timeBasedOnDifficulty = 0f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        var difficultyIndex = DifficultyManager.Instance.CurrentDifficultyIndex;
+        timeBasedOnDifficulty = (float)difficultyIndex;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // TODO: Implement dynamic difficulty
+
         elapsed += Time.deltaTime;
-        if (elapsed >= 1f)
+        var timeToElapse = (1.2f - (timeBasedOnDifficulty / 10f));
+
+        if (elapsed >= timeToElapse)
         {
-            elapsed = elapsed % 1f;
+            elapsed = elapsed % timeToElapse;
             audioData.clip = clip;
             audioData.Play();
             GameObject canonball = Instantiate(projectile, transform.position,
