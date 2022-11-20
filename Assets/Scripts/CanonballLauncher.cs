@@ -27,7 +27,6 @@ public class CanonballLauncher : MonoBehaviour
 
     void Update()
     {
-        // TODO: Implement dynamic difficulty
         if(difficultyIndex == (int)DifficultyLevels.DYNAMIC)
         {
             float totalTimeElapsed = GameStatsManager.Instance.TotalTimeElapsed;
