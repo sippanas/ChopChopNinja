@@ -35,4 +35,19 @@ public class MusicManager : MonoBehaviour
         SongText.text = $"{source.clip.name}";
         source.Play();
     }
+
+    public void LowerVolumeForGameScene() => source.volume = 0.10f;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    void Update()
+    {
+        if(!source.isPlaying)
+        {
+            PlayNextSong();
+        }
+    }
 }

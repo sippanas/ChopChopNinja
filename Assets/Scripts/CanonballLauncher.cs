@@ -27,7 +27,7 @@ public class CanonballLauncher : MonoBehaviour
         // TODO: Implement dynamic difficulty
 
         elapsed += Time.deltaTime;
-        var timeToElapse = (1.2f - (timeBasedOnDifficulty / 10f));
+        var timeToElapse = (1.5f - (timeBasedOnDifficulty / 10f));
 
         if (elapsed >= timeToElapse)
         {
