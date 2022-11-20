@@ -7,7 +7,7 @@ public class CanonballLauncher : MonoBehaviour
     [SerializeField]
     public GameObject projectile;
     [SerializeField]
-    public float launchVelocity = 700f;
+    public float launchVelocity = 1000f;
     [SerializeField]
     [Range(10, 100)]
     private int LinePoints = 25;
