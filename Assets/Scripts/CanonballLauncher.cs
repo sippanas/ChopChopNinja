@@ -5,17 +5,11 @@ using UnityEngine;
 public class CanonballLauncher : MonoBehaviour
 {
     [SerializeField]
+    public List<GameObject> cannons;
+    [SerializeField]
     public GameObject projectile;
     [SerializeField]
     public float launchVelocity = 1000f;
-    [SerializeField]
-    [Range(10, 100)]
-    private int LinePoints = 25;
-    [SerializeField]
-    [Range(0.01f, 0.25f)]
-    private float TimeBetweenPoints = 0.1f;
-    [SerializeField]
-    AudioSource audioData;
     [SerializeField]
     AudioClip clip;
 
@@ -38,14 +32,28 @@ public class CanonballLauncher : MonoBehaviour
         if (elapsed >= timeToElapse)
         {
             elapsed = elapsed % timeToElapse;
-            audioData.clip = clip;
-            audioData.Play();
-            GameObject canonball = Instantiate(projectile, transform.position,
-                                                     transform.rotation);
-            canonball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
-                                                 (0, launchVelocity, 0));
-            
+            Shoot(cannons[Random.Range(0, cannons.Count)]);
+            //StartCoroutine(Pattern1()); //use at your own risk
         }
         
+    }
+    void Shoot(GameObject cannon)
+    {
+        AudioSource audio = cannon.GetComponentInParent<AudioSource>();
+        audio.Play();
+        GameObject canonball = Instantiate(projectile, cannon.transform.position,
+                                                     cannon.transform.rotation);
+        canonball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
+                                             (0, launchVelocity + Random.Range(-5f, 5f), 0));
+    }
+    IEnumerator Pattern1()
+    {
+        Shoot(cannons[0]);
+        yield return new WaitForSeconds(0.3f);
+        Shoot(cannons[1]);
+        yield return new WaitForSeconds(0.3f);
+        Shoot(cannons[2]);
+        yield return new WaitForSeconds(0.3f);
+        Shoot(cannons[3]);
     }
 }

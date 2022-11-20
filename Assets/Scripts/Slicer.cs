@@ -42,6 +42,7 @@ public class Slicer : MonoBehaviour
     {
         obj.AddComponent<MeshCollider>().convex = true;
         obj.AddComponent<Rigidbody>();
+        obj.AddComponent<CannonballDestroyer>();
     }
 
     private SlicedHull SliceObject(GameObject obj, Material crossSectionMaterial = null)
