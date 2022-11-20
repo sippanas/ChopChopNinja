@@ -14,22 +14,30 @@ public class CanonballLauncher : MonoBehaviour
     AudioClip clip;
 
     float elapsed = 0;
+
+    int difficultyIndex = (int)DifficultyLevels.EASY;
+    float baseTimeToElapse = 1.5f;
     float timeBasedOnDifficulty = 0f;
 
     void Start()
     {
-        var difficultyIndex = DifficultyManager.Instance.CurrentDifficultyIndex;
-        timeBasedOnDifficulty = (float)difficultyIndex;
+        difficultyIndex = DifficultyManager.Instance.CurrentDifficultyIndex;
+        if(difficultyIndex != (int)DifficultyLevels.DYNAMIC) timeBasedOnDifficulty = (float)difficultyIndex;
     }
 
     void Update()
     {
         // TODO: Implement dynamic difficulty
+        if(difficultyIndex == (int)DifficultyLevels.DYNAMIC)
+        {
+            float totalTimeElapsed = GameStatsManager.Instance.TotalTimeElapsed;
+            timeBasedOnDifficulty = Mathf.Floor(totalTimeElapsed / 30f);
+        }
 
         elapsed += Time.deltaTime;
-        var timeToElapse = (1.5f - (timeBasedOnDifficulty / 10f));
+        var timeToElapse = (baseTimeToElapse - (timeBasedOnDifficulty / 10f));
 
-        if (elapsed >= timeToElapse)
+        if (elapsed >= Mathf.Clamp(timeToElapse, 0.1f, baseTimeToElapse))
         {
             elapsed = elapsed % timeToElapse;
             Shoot(cannons[Random.Range(0, cannons.Count)]);
