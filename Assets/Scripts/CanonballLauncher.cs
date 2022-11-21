@@ -29,7 +29,7 @@ public class CanonballLauncher : MonoBehaviour
     {
         if(difficultyIndex == (int)DifficultyLevels.DYNAMIC)
         {
-            float totalTimeElapsed = GameStatsManager.Instance.TotalTimeElapsed;
+            float totalTimeElapsed = GameManager.Instance.TotalTimeElapsed;
             timeBasedOnDifficulty = Mathf.Floor(totalTimeElapsed / 30f);
         }
 
@@ -50,6 +50,7 @@ public class CanonballLauncher : MonoBehaviour
         audio.Play();
         GameObject canonball = Instantiate(projectile, cannon.transform.position,
                                                      cannon.transform.rotation);
+        canonball.tag = "ShouldBeSliced";
         canonball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
                                              (0, launchVelocity + Random.Range(-5f, 5f), 0));
     }

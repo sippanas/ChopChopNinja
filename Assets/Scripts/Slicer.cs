@@ -47,6 +47,7 @@ public class Slicer : MonoBehaviour
 
     private SlicedHull SliceObject(GameObject obj, Material crossSectionMaterial = null)
     {
+        GameManager.Instance.AddObjectSliced();
         return obj.Slice(transform.position, transform.up, crossSectionMaterial);
     }
 
