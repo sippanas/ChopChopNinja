@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using EzySlice;
+using TMPro;
+
 public class Slicer : MonoBehaviour
 {
     public Material materialAfterSlice;
@@ -21,7 +23,6 @@ public class Slicer : MonoBehaviour
                 GameObject upperHullGameobject = slicedObject.CreateUpperHull(objectToBeSliced.gameObject, materialAfterSlice);
                 
                 GameObject lowerHullGameobject = slicedObject.CreateLowerHull(objectToBeSliced.gameObject, materialAfterSlice);
-                
 
                 upperHullGameobject.transform.position = objectToBeSliced.transform.position;
                 lowerHullGameobject.transform.position = objectToBeSliced.transform.position;
@@ -34,7 +35,7 @@ public class Slicer : MonoBehaviour
                 lowerHullGameobject.GetComponent<Rigidbody>().AddForce(new Vector3(100, 0, 0));
                 Destroy(objectToBeSliced.gameObject);
             }
-            Debug.Log("slice");
+            //Debug.Log("slice");
         }
     }
 
@@ -50,6 +51,4 @@ public class Slicer : MonoBehaviour
         GameManager.Instance.AddObjectSliced();
         return obj.Slice(transform.position, transform.up, crossSectionMaterial);
     }
-
-
 }
