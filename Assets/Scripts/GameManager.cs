@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI TimeSpentPlayingText;
 
     [SerializeField]
+    private TextMeshProUGUI PointsCollectedText;
+
+    [SerializeField]
     private TextMeshProUGUI ObjectsSlicedText;
 
     public void AddPoints(int points) => PointsCollected += points;
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         var seconds = Mathf.RoundToInt(elapsedInt % 60);
 
         TimeSpentPlayingText.text = $"{minutes} min {seconds} sec";
+        PointsCollectedText.text = $"{PointsCollected}";
         ObjectsSlicedText.text = $"{ObjectsSliced}";
 
         GameEndCanvas.SetActive(true);
