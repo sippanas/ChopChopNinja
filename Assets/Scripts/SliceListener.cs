@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class SliceListener : MonoBehaviour
 {
+    [SerializeField]
+    AudioClip sliceClip;
+    [SerializeField]
+    AudioClip blockClip;
     public Slicer slicer;
     private void OnTriggerEnter(Collider other)
     {
@@ -16,12 +20,16 @@ public class SliceListener : MonoBehaviour
             if (other.tag == "ShouldBeSliced")
             {
                 var sliceSoundEffect = this.GetComponent<AudioSource>();
+                sliceSoundEffect.clip = sliceClip;
                 sliceSoundEffect.Play();
             }
         }
         else
         {
-            other.tag = "none";
+            var sliceSoundEffect = this.GetComponent<AudioSource>();
+            sliceSoundEffect.clip = blockClip;
+            sliceSoundEffect.Play();
+            other.tag = "Untagged";
             Rigidbody rb = other.GetComponent<Rigidbody>();
             Vector3 opposite = -rb.velocity * 3;
             rb.velocity = Vector3.zero;

@@ -55,7 +55,20 @@ public class WeaponSelector : MonoBehaviour
 
     private void ShowWeapon(int index)
     {
-        // Save transform values
+        if(this.transform.GetChild(1).gameObject.activeSelf)
+        {
+            this.transform.GetChild(1).gameObject.SetActive(false);
+            this.transform.GetChild(0).gameObject.SetActive(true);
+            weaponNameText.text = "Katana";
+        }
+        else
+        {
+            
+            this.transform.GetChild(1).gameObject.SetActive(true);
+            this.transform.GetChild(0).gameObject.SetActive(false);
+            weaponNameText.text = "Comically large sword";
+        }
+        /*// Save transform values
         Transform transformValues = this.transform.GetChild(0).transform;
 
         // Removes the previous weapon
@@ -63,15 +76,17 @@ public class WeaponSelector : MonoBehaviour
 
         var instantiateWeapon = Instantiate(weapons.ElementAt(index), transformValues);
         instantiateWeapon.transform.SetParent(this.transform);
+       // instantiateWeapon.transform = new Vector3(0, -10, -35);
+        //instantiateWeapon.transform.SetPositionAndRotation(new Vector3(0, -10, -35), new Quaternion(90, 0, -90, 0));
 
-        if(weaponNames.ElementAt(index) != null)
+        if (weaponNames.ElementAt(index) != null)
         {
             weaponNameText.text = $"{weaponNames.ElementAt(index)}";
         }
         else
         {
             weaponNameText.text = $"Weapon {index}";
-        }
+        }*/
     }
 
     public void SelectWeapon()
