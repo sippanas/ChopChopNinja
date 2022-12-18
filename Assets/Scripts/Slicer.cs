@@ -34,6 +34,7 @@ public class Slicer : MonoBehaviour
                 upperHullGameobject.GetComponent<Rigidbody>().AddForce(new Vector3(-100, 0, 0));
                 lowerHullGameobject.GetComponent<Rigidbody>().AddForce(new Vector3(100, 0, 0));
                 Destroy(objectToBeSliced.gameObject);
+                ComboManager.instance.Slice();
             }
             //Debug.Log("slice");
         }

@@ -50,6 +50,10 @@ public class CanonballLauncher : MonoBehaviour
         audio.Play();
         GameObject canonball = Instantiate(projectile, cannon.transform.position,
                                                      cannon.transform.rotation);
+        if (ModifierManager.instance.tinyCanonballs)
+        {
+            canonball.transform.localScale = new Vector3(20, 20, 20);
+        }
         canonball.tag = "ShouldBeSliced";
         canonball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
                                              (0, launchVelocity + Random.Range(-5f, 5f), 0));
