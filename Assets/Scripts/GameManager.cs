@@ -38,6 +38,21 @@ public class GameManager : MonoBehaviour
     private GameObject GameEndCanvas;
 
     [SerializeField]
+    private GameObject GameStatsCanvas;
+
+    [Header("GameStatsCanvas")]
+    [SerializeField]
+    private TextMeshProUGUI Stats_LivesText;
+
+    [SerializeField]
+    private TextMeshProUGUI Stats_ObjectsToSliceForLife;
+
+    [SerializeField]
+    private TextMeshProUGUI Stats_PointsCollected;
+
+    // GameEndCanvas
+    [Header("GameEndCanvas")]
+    [SerializeField]
     private TextMeshProUGUI TimeSpentPlayingText;
 
     [SerializeField]
@@ -53,6 +68,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         GameHasEnded = true;
+        GameStatsCanvas.SetActive(false); // Disable stats canvas, because we will enable end canvas
 
         var elapsedInt = (int)TotalTimeElapsed;
         var minutes = Mathf.Floor(elapsedInt / 60);
@@ -77,7 +93,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(!GameHasEnded) TotalTimeElapsed += Time.deltaTime;
+        if(!GameHasEnded) 
+        {
+            TotalTimeElapsed += Time.deltaTime;
+            Stats_LivesText.text = new string ('♥', ComboManager.instance.lives);
+            Stats_ObjectsToSliceForLife.text = $"{ComboManager.instance.toSlice}";
+            Stats_PointsCollected.text = $"{this.PointsCollected}";
+        }
     }
 
     void Awake()
